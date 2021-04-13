@@ -1,0 +1,110 @@
+﻿@model GymBro.Models.EventDetailsViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>Detalji</h2>
+
+<div>
+    <hr />
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.Event.DateAndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Event.DateAndTime)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Event.SportId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Activity.Name)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Event.LocationId)
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.Location.Name)*@
+            @Html.ActionLink(Model.Location.Name, "Details", "SportsFacilities", new { id = Model.Location.Id }, new { })
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Event.EventCreatorId)
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.EventCreator.FirstName + model.EventCreator.LastName)*@
+            @Html.ActionLink(Model.EventCreator.FirstName + " " + Model.EventCreator.LastName, "Details", "Account", new { id = Model.EventCreator.Id }, new { })
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Event.MaxNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Event.MaxNumber)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Event.CurrentNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Event.CurrentNumber)
+        </dd>
+    </dl>
+
+    <h3>Učesnici</h3>
+    <ul>
+        @foreach (var user in Model.Participants)
+        {
+            <li>
+                @*user.FirstName @user.LastName*@
+                @Html.ActionLink(user.FirstName + " " + user.LastName, "Details", "Account", new { id = user.Id }, new { })
+
+            </li>
+        }
+    </ul>
+    @if (!Model.IsCreator)
+    {
+        <button class="btn btn-primary">
+            @Html.ActionLink("Prijavi se", "SignUp", new { id = Model.Event.Id })
+        </button>
+    }
+    else
+    {
+        <button class="btn btn-primary">
+            @Html.ActionLink("Otkaži", "CancelEvent", new { id = Model.Event.Id })
+        </button>
+        <button class="btn btn-primary">
+            @Html.ActionLink("Izmeni", "Edit", new { id = Model.Event.Id })
+        </button>
+    }
+
+    <br />
+    <br />
+
+    <p>
+        @Html.ActionLink("Nazad na listu događaja", "Index")
+    </p>
+
+    <hr />
+
+</div>

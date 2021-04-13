@@ -1,0 +1,95 @@
+﻿@model GymBro.Models.ApplicationUser
+
+@{
+    ViewBag.Title = Model.FirstName + " " + Model.LastName;
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<h2>@(Model.FirstName + " " + Model.LastName)</h2>
+@using (Html.BeginForm("Edit", "Account"))
+{
+    <div>
+        <h4>Osnovne informacije</h4>
+        <hr />
+
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+            <br />
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <br />
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Gender)
+            </dt>
+            @if (Model.Gender == true)
+            {
+                <dd>Muški</dd>
+            }
+            else
+            {
+                <dd>Ženski</dd>
+            }
+
+            <br />
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Birthdate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Birthdate)
+                @*@Model.Birthdate.ToShortDateString()*@
+            </dd>
+
+            <br />
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Town)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Town)
+            </dd>
+
+            <br />
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AverageRating)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.AverageRating)
+            </dd>
+
+            <br />
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        </dl>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i>  Izmeni lične podatke</button>
+        </div>
+        @*<p class="btn btn-primary">
+                @Html.ActionLink("Izmeni lične podatke", "Edit", "Account")
+            </p>*@
+    </div>
+
+    <hr />
+}

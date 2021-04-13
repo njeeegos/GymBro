@@ -1,0 +1,237 @@
+﻿@{
+    ViewBag.Title = "Početna";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GymBro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+
+    <!-- css files -->
+   
+    <link href="~/Content/bootstrap-flatly.css" rel='stylesheet' type='text/css' /><!-- bootstrap css -->
+    <link href="~/TemplateForHomePage/css/style.css" rel='stylesheet' type='text/css' /><!-- custom css -->
+    <link href="~/TemplateForHomePage/css/font-awesome.min.css" rel="stylesheet"><!-- fontawesome css -->
+    <!-- //css files -->
+
+    <link href="~/TemplateForHomePage/css/css_slider.css" type="text/css" rel="stylesheet" media="all">
+
+    <!-- google fonts -->
+    <link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+    <!-- //google fonts -->
+
+</head>
+<body>
+    <!-- banner -->
+    <section class="banner_w3lspvt" id="home">
+        <div class="csslider infinity" id="slider1">
+            <input type="radio" name="slides" checked="checked" id="slides_1" />
+            <input type="radio" name="slides" id="slides_2" />
+            <input type="radio" name="slides" id="slides_3" />
+            <input type="radio" name="slides" id="slides_4" />
+            <ul>
+                <li>
+                    <div class="banner-top">
+                        <div class="overlay">
+                            <div class="container">
+                                <div class="w3layouts-banner-info">
+                                    <h3 class="text-wh"> Dobrodošli na našu <span>stranicu</span></h3>
+                                    <h4 class="text-wh">Želite da vežbate, ali nemate dovoljno iskustva? Pridružite nam se! </h4>
+                                    <a href="~/Account/Register" class="button-style mt-4">Registruj se</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="banner-top1">
+                        <div class="overlay">
+                            <div class="container">
+                                <div class="w3layouts-banner-info">
+                                    <h3 class="text-wh">Otkrijte sve sportske terene i teretane u vašoj blizini!</h3>
+                                    <h4 class="text-wh"> Sve na jednom mestu. Brzo i jednostavno pronađite idealnu lokaciju za vas </h4>
+                                    <a href="~/SportsFacilities/Index" class="button-style mt-4">Sportski objekti</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="banner-top2">
+                        <div class="overlay">
+                            <div class="container">
+                                <div class="w3layouts-banner-info">
+                                    <h3 class="text-wh"> U društvu je sve  <span>lakše</span></h3>
+                                    <h4 class="text-wh">Organizujte događaj i sakupite družinu da zajedno vežbate i delite svoja iskustva</h4>
+                                    <a href="~/Events/Index" class="button-style mt-4">Dodaj događaj</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="banner-top3">
+                        <div class="overlay">
+                            <div class="container">
+                                <div class="w3layouts-banner-info">
+                                    <h3 class="text-wh"> Pridružite se ekipi <span></span></h3>
+                                    <h4 class="text-wh">Pogledajte spisak svih aktivnosti i pridružite se ekipi! </h4>
+                                    <a href="~/Events/Index" class="button-style mt-4">Saznaj više</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="arrows">
+                <label for="slides_1"></label>
+                <label for="slides_2"></label>
+                <label for="slides_3"></label>
+                <label for="slides_4"></label>
+            </div>
+        </div>
+    </section>
+    <!-- //banner -->
+
+    <section class="about py-lg-5 py-md-5 py-3" id="about">
+        <div class="container">
+
+            <!-- services -->
+            <div class="fetured-info py-lg-5 py-3">
+                <h3 class="heading text-center mb-lg-5 mb-3">Više o nama</h3>
+                <div class="row fetured-sec mt-lg-5">
+
+                    <div class="col-lg-6 serv_bottom">
+                        <div class="featured-left text-center row">
+                            <div class="col-sm-6">
+                                <div class="bottom-gd fea">
+                                    <span class="fa fa-futbol-o" aria-hidden="true"></span>
+                                    <h3 class="my-3">Steknite kondiciju</h3>
+                                    <p class="px-lg-3">
+                                        Ovde se možete naći svog partnera za trening koji će vam pomoći da steknete kondiciju i dođete do
+                                        savršene forme bez plaćanja ličnog trenera
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="bottom-gd fea">
+                                    <span class="fa fa-calendar" aria-hidden="true"></span>
+                                    <h3 class="my-3"> Organizujte događaje </h3>
+                                    <p class="px-lg-3">
+                                        Nedostaju vam članovi za fudbal, basket ili neki drugi sport? Odredite vreme, mesto i dan,
+                                        a vaši vršnjaci će vam se pridružiti.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="bottom-gd fea">
+                                    <span class="fa fa-comments" aria-hidden="true"></span>
+                                    <h3 class="my-3">Podelite svoje veštine sa drugima</h3>
+                                    <p class="px-lg-3">
+                                        Ukoliko imate više iskustva u sportu ili teretani, organizujte događaje i pomognite drugima da
+                                        napreduju i steknu formu i kondiciju kao i vi <br />
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="bottom-gd fea">
+                                    <span class="fa fa-users" aria-hidden="true"></span>
+                                    <h3 class="my-3">Zabavite se </h3>
+                                    <p class="px-lg-3">
+                                        Ovo je idelano mesto da steknete nova poznanstva i zabavite se uz dobru fizičku aktivnost. Možda baš
+                                        ovde nađete svoju ekipu, ne samo za trening već i za svakodnevno druženje
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <img src="~/TemplateForHomePage/Image/11.jpg" class="img-fluid" alt="">
+                    </div>
+                </div>
+            </div>
+            <!-- //services -->
+        </div>
+    </section>
+
+
+    <!-- testimonials -->
+    <section class="testimonials py-5" id="testi">
+        <div class="container py-xl-5 py-lg-3">
+            <h3 class="heading text-center mb-lg-5 mb-3">Šta korisnici misle o sajtu</h3>
+            <div class="row">
+                <div class="col-lg-6 testimonials_grid">
+                    <div class="bg-white rounded p-lg-5 p-3">
+                        <p class="sub-test">
+                            <span class="fa fa-quote-left" aria-hidden="true"></span>Po mom mišljenju, najbolja prednost ovog sajta je ta što možete da okupite
+                            ekipu za bilo koju sportsku aktivnost, brzo i jednostavno. Pored toga, postoji dobar spisak svih sportskih terena na jednom mestu, što
+                            omogućava da brzo i lako pronađete onaj koji je u vašoj blizini.
+                        </p>
+                        <div class="row mt-4">
+                            <div class="col-3 testi-img-res">
+                                <img src="~/TemplateForHomePage/Image/Petar P.jpg" alt=" " class="img-fluid" />
+                            </div>
+                            <div class="col-9 testi_grid mt-xl-3 mt-lg-2 mt-md-4 mt-2">
+                                <h5 class="mb-2">Petar Petrović</h5>
+                                <p>Student Elektronskog fakulteta u Nišu</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 testimonials_grid mt-lg-0 mt-4">
+                    <div class="bg-white rounded p-lg-5 p-3">
+                        <p class="sub-test">
+                            <span class="fa fa-quote-left" aria-hidden="true"></span> Ukoliko ste početnik i nemate previše iskustva u teretanama,
+                            ovo je idelano mesto da pronađete osobu koja želi da vam pomogne i da vas nauči kako da vežbate. Najbolje od svega je
+                            što ne morate da plaćate tu osobu kao ličnog trenera. Ponekad možete da upoznate jako dobre i fine osobe.
+                        </p>
+                        <div class="row mt-4">
+                            <div class="col-3 testi-img-res">
+                                <img src="~/TemplateForHomePage/Image/Bojana S.jpg" alt=" " class="img-fluid" />
+                            </div>
+                            <div class="col-9 testi_grid  mt-xl-3 mt-lg-2 mt-md-4 mt-2">
+                                <h5 class="mb-2">Bojana Svilenković</h5>
+                                <p>Student Elektronskog fakulteta u Nišu</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- //testimonials -->
+    <!--we are ready -->
+    <section class="banner-image-two py-lg-4 py-md-3 py-sm-3 py-3 text-center">
+
+        <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+            <h2>Spremni smo da odgovorimo na sva vaša pitanja</h2>
+            <p class="mt-lg-5 mt-3 boja-slova">
+                Ukoliko imate bilo kakvih pitanja ili želite da podelite nešto sa nama, slobodno nas kontaktirajte.
+                Mi smo tu da vam pomognemo i odgovorimo na sva vaša pitanja!
+            </p>
+            <div class="view-buttn mt-md-4 mt-sm-4 mt-3">
+                <a href="~/Home/Contact" class="btn">Kontaktirajte nas</a>
+            </div>
+        </div>
+
+    </section>
+    <!--we are ready-->
+
+    <a href="#home" class="move-top text-center"></a>
+
+</body>
+</html>

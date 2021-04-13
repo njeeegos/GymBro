@@ -1,0 +1,144 @@
+﻿@model GymBro.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Registruj se";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- meta tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- /meta tags -->
+    <!-- custom style sheet -->
+    <link href="~/LoginRegistration/css/style.css" rel="stylesheet" type="text/css" />
+    <!-- /custom style sheet -->
+    <!-- fontawesome css -->
+    <link href="~/LoginRegistration/css/fontawesome-all.css" rel="stylesheet" />
+    <!-- /fontawesome css -->
+    <!-- google fonts-->
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <!-- /google fonts-->
+    @Scripts.Render("~/bundles/lib")
+    <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.min.css" />
+
+</head>
+
+
+<body>
+    <div class="overlay">
+        <h1> </h1>
+        <div class=" w3l-login-form">
+            <h2>Registruj se ovde</h2>
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class=" w3l-form-group">
+                    <label>Ime </label>
+                    <div class="group">
+                        @Html.TextBoxFor(m => m.FirstName, new { @placeholder = "Ime" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.FirstName)
+                </div>
+
+                <div class=" w3l-form-group">
+                    <label>Prezime </label>
+                    <div class="group">
+                        @Html.TextBoxFor(m => m.LastName, new { @placeholder = "Prezime" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.LastName)
+                </div>
+
+                <div class=" w3l-form-group">
+                    <label>Pol </label>
+                    <div class="col-md-10">
+                        @Html.RadioButtonFor(model => model.Gender, true)
+                        <span style="color: white">Muški </span>
+                        @Html.RadioButtonFor(model => model.Gender, false)
+                        <span style="color: white">Ženski</span>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Gender)
+
+                    <br />
+                </div>
+
+                <div class=" w3l-form-group">
+                    <label>Datum rođenja </label>
+                    @*<div class="group">
+                        @Html.TextBoxFor(m => m.Birthdate, "{0:dd.MM.yyyy.}", new { @placeholder = "Datum rođenja" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Birthdate)*@
+                    <div class="group">
+                        @Html.TextBoxFor(m => m.Birthdate, "{0:dd.MM.yyyy.}", new { @id = "datetimepicker4", @placeholder = "Datum rođenja", @class = "form -control" })
+                        <script type="text/javascript">
+                            $(function () {
+                                $("#datetimepicker4").datetimepicker(
+                                    {
+
+                                        showTodayButton: true,
+                                        format: 'DD.MM.YYYY.',
+                                        showClose: true,
+                                        showClear: true,
+                                        toolbarPlacement: 'top',
+                                        stepping: 15
+                                    });
+                            });
+                        </script>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Birthdate)
+                </div>
+
+                <div class=" w3l-form-group">
+                    <label>Grad </label>
+                    <div class="group">
+                        @Html.TextBoxFor(m => m.Town, new { @placeholder = "Grad" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Town)
+
+                </div>
+
+                <div class=" w3l-form-group">
+                    <label>E-mail </label>
+                    <div class="group">
+                        @Html.TextBoxFor(m => m.Email, new { @placeholder = "E-mail" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Email)
+
+                </div>
+
+                <div class=" w3l-form-group">
+                    <label>Šifra </label>
+                    <div class="group">
+                        @Html.PasswordFor(m => m.Password, new { @placeholder = "Šifra" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Password)
+
+                </div>
+
+                <div class=" w3l-form-group">
+                    <label>Potvrdi šifru </label>
+                    <div class="group">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "Potvrdi šifru" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                </div>
+
+                <button type="submit" style="width:100%"> Potvrdi </button>
+            }
+
+
+        </div>
+
+        </div>
+</body>
+
+</html>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

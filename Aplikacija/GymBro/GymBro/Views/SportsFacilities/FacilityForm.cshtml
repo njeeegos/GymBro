@@ -1,0 +1,41 @@
+﻿@model GymBro.Models.FacilityFormViewModel
+
+@{
+    ViewBag.Title = Model.Facility.Name;
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>Dodaj/Izmeni</h2>
+
+<hr />
+
+@using (Html.BeginForm("Save", "SportsFacilities"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Facility.Name)
+        @Html.TextBoxFor(m => m.Facility.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Facility.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Facility.Town)
+        @Html.TextBoxFor(m => m.Facility.Town, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Facility.Town)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Facility.Address)
+        @Html.TextBoxFor(m => m.Facility.Address, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Facility.Address)
+
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(m => m.Sports, new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(m => m.Facility.Id)
+    @Html.AntiForgeryToken();
+    <button type="submit" class="btn btn-primary">Sačuvaj</button>
+    <span>
+        @Html.ActionLink("Otkaži", "Index", "SportsFacilities", new { }, new { @class = "btn btn-primary" })
+    </span>
+}
+
+<hr />

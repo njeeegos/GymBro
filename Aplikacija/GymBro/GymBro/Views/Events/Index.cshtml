@@ -1,0 +1,202 @@
+﻿@model IPagedList<GymBro.Models.EventDetailsViewModel>
+
+@{
+    ViewBag.Title = "Događaji";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+@using PagedList.Mvc;
+@using PagedList;
+
+<h2>Sportski Događaji</h2>
+
+<hr />
+
+<div class="row">
+    <p class="btn btn-primary" style="margin-right: 15px">
+        @Html.ActionLink("Dodaj događaj", "Create")
+    </p>
+
+    <p class="btn btn-primary">
+        @Html.ActionLink("Prikaži moje događaje", "MyEvents")
+    </p>
+
+    <hr />
+
+    <p class="btn btn-primary">
+        @Html.ActionLink("Sortiraj po datumu", "Index", new { sortBy = ViewBag.DatumSort })
+    </p>
+</div>
+<br />
+
+<div class="container">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+            <input type="text" id="Search" placeholder="Pretrazi" class="form-control" />
+        </div>
+    </div>
+</div>
+
+
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Event.DateAndTime)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Event.MaxNumber)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Event.CurrentNumber)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Event.LocationId)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Event.SportId)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Event.EventCreatorId)
+            </th>
+
+            <th></th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Event.DateAndTime)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Event.MaxNumber)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Event.CurrentNumber)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Activity.Name)
+                </td>
+
+                <td>
+                    @Html.ActionLink(item.EventCreator.FirstName + " " + item.EventCreator.LastName, "Details", "Account", new { id = item.EventCreator.Id }, new { })
+                </td>
+
+                <td>
+                    @Html.ActionLink("Detaljnije", "Details", new { id = item.Event.Id })
+                </td>
+            </tr>
+        }
+
+    </table>*@
+
+
+<div class="container">
+    <div class="row">
+        <div class="[ col-xs-12 col-sm-offset-2 col-sm-8 ]">
+            <ul class="event-list">
+                @foreach (var item in Model)
+                {
+                    <li onclick="location.href='/Events/Details/@item.Event.Id'" class="Search" )>
+                        <time datetime="2014-07-20">
+                            <span class="day">
+                                @{
+                                    int day = (int)item.Event.DateAndTime.DayOfWeek;
+                                    string translation;
+                                    switch (day)
+                                    {
+                                        case 1:
+                                            translation = "Ponedeljak";
+                                            break;
+                                        case 2:
+                                            translation = "Utorak";
+                                            break;
+                                        case 3:
+                                            translation = "Sreda";
+                                            break;
+                                        case 4:
+                                            translation = "Četvrtak";
+                                            break;
+                                        case 5:
+                                            translation = "Petak";
+                                            break;
+                                        case 6:
+                                            translation = "Subota";
+                                            break;
+                                        default:
+                                            translation = "Nedelja";
+                                            break;
+                                    }
+                                }
+                                @translation
+                            </span>
+                            <span class="month">
+                                @Html.DisplayFor(modelItem => item.Event.DateAndTime)
+                            </span>
+                            <span class="year">@item.Event.DateAndTime.Year</span>
+                            <span class="time">@item.Event.DateAndTime.TimeOfDay</span>
+                        </time>
+                        <div class="info">
+                            <h2 class="title">@item.Activity.Name</h2>
+                            <p class="desc">Lokacija: @item.Location.Name</p>
+                            <p class="desc">
+                                Organizator: @Html.ActionLink(item.EventCreator.FirstName + " " + item.EventCreator.LastName, "Details", "Account", new { id = item.EventCreator.Id }, new { })
+                            </p>
+                            <p class="desc">Trenutno učesnika: @item.Event.CurrentNumber/@item.Event.MaxNumber</p>
+
+                            @Html.ActionLink("Detaljnije", "Details", new { id = item.Event.Id })
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+@Html.PagedListPager(Model, i => Url.Action("Index", "Events", new { i, search = Request.QueryString["search"] }))
+
+<hr />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else
+                    $(this).show();
+            });
+        });
+    });
+</script>
+@*@section scripts
+        {
+    <script>
+        $(document).ready(function () {
+            $("#events").DataTable();
+            )
+    </script>
+        }*@
+

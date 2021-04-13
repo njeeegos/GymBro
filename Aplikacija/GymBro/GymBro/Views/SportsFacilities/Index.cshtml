@@ -1,0 +1,208 @@
+﻿@model IPagedList<GymBro.Models.SportsFacility>
+
+@{
+    ViewBag.Title = "Sportski objekti";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+@using PagedList.Mvc;
+@using PagedList;
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin="" />
+
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+
+<style>
+    #mapid {
+        height: 450px;
+        width: 100%;
+    }
+</style>
+
+
+<h2>Sportski Objekti</h2>
+
+<hr />
+
+@if (User.IsInRole("Admin"))
+{
+    <p class="btn btn-primary">
+        @Html.ActionLink("Dodaj objekat", "Create")
+    </p>
+}
+<br />
+
+<div class="container" Style="margin-top:15px">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+            <input type="text" id="Search" placeholder="Pretrazi" class="form-control" />
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered">
+    <tr class="success">
+        <th>
+            @* @Html.DisplayNameFor(model => model.First().Name)*@
+            @Html.ActionLink("Naziv", "Index", new { sortBy = ViewBag.NazivSort })
+        </th>
+        <th>
+            @* @Html.DisplayNameFor(model => model.First().Address)*@
+            @Html.ActionLink("Adresa", "Index", new { sortBy = ViewBag.AdresaSort })
+        </th>
+        <th>
+            @*  @Html.DisplayNameFor(model => model.First().AverageGrade)*@
+            @Html.ActionLink("Ocena", "Index", new { sortBy = ViewBag.OcenaSort })
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        <tr class="Search">
+            <td>
+                @Html.ActionLink(item.Name, "Details", new { id = item.Id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AverageGrade)
+            </td>
+            @if (User.IsInRole("Admin"))
+            {
+                <td>
+                    @Html.ActionLink("Izmeni", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Obriši", "Delete", new { id = item.Id })
+                </td>
+            }
+        </tr>
+    }
+
+</table>
+
+@Html.PagedListPager(Model, i => Url.Action("Index", "SportsFacilities", new { i, search = Request.QueryString["search"] }))
+
+
+
+
+
+
+
+<div id="mapid"></div>
+@section Scripts
+{
+    <script>
+        var mymap = L.map('mapid').setView([43.321181, 21.894267], 13);
+
+
+        const attribution = '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>';
+
+        const tileUrl = 'https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=djBu9nDBvQZD4OQDAIna';
+        const tiles = L.tileLayer(tileUrl, { attribution });
+
+        tiles.addTo(mymap);
+
+        var myIcon = L.icon({
+            iconUrl: '/Content/MapImageIcon/pin24.png',
+            iconRetinaUrl: '/Content/MapImageIcon/pin48.png',
+            iconSize: [29, 24],
+            iconAnchor: [9, 21],
+            popupAnchor: [0, -14]
+        });
+
+
+        var niz1 = [];
+        var niz2 = [];
+        var niz3 = [];
+
+       @foreach(var item in Model)
+       {
+
+           @:niz1.push("@item.Latitude");
+           @:niz2.push("@item.Longitude");
+           @:niz3.push("@item.Name");
+       }
+
+        for (i = 0; i < niz1.length && niz2.length; ++i) {
+
+            var marker = L.marker([niz1[i], niz2[i]], { icon: myIcon }).addTo(mymap);
+            marker.bindPopup(niz3[i]);
+        }
+        //const marker = L.marker([43.325977, 21.897596]).addTo(mymap);
+
+
+         //marker.bindPopup("@Html.DisplayNameFor(model=> model.First().Address)").openPopup();
+
+
+
+    </script>
+}
+@*
+    @section Scripts
+
+            {
+
+        <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#SportsFacilities").DataTable({
+                    ajax: {
+                        url: "/SportsFacilities",
+                        dataSrc: ""
+                    },
+                    columns: [
+                        {
+                            data: "Name",
+                        },
+
+                        {
+                            data: "Adress",
+                        },
+
+                        {
+                            data: "AverageGrade",
+                        },
+                    ]
+                });
+            })
+        </script>
+    }
+
+*@
+
+
+
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else
+                    $(this).show();
+            });
+        });
+
+        });
+
+
+</script>
+
+<hr />

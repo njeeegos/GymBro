@@ -1,0 +1,83 @@
+﻿
+    @using GymBro.Models
+    @model LoginViewModel
+    @{
+        ViewBag.Title = "Uloguj se";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+
+    <!--
+        Author: W3layouts
+        Author URL: http://w3layouts.com
+        License: Creative Commons Attribution 3.0 Unported
+        License URL: http://creativecommons.org/licenses/by/3.0/
+    -->
+
+    <!DOCTYPE html>
+    <html>
+
+    <!-- Head -->
+    <head>
+
+        <!-- meta tags -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- /meta tags -->
+        <!-- custom style sheet -->
+        <link href="~/LoginRegistration/css/style.css" rel="stylesheet" type="text/css" />
+        <!-- /custom style sheet -->
+        <!-- fontawesome css -->
+        <link href="~/LoginRegistration/css/fontawesome-all.css" rel="stylesheet" />
+        <!-- /fontawesome css -->
+        <!-- google fonts-->
+        <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+              rel="stylesheet">
+        <!-- /google fonts-->
+
+    </head>
+    <!-- //Head -->
+    <!-- Body -->
+
+    <body>
+        <div class="overlay">
+            <h1> </h1>
+
+            <div class=" w3l-login-form">
+                <h2>Uloguj se</h2>
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    
+                <div class=" w3l-form-group">
+                    <label>E-mail </label>
+                    <div class="group">
+                        <i class="fas fa-user"></i>
+                        @Html.TextBoxFor(m => m.Email, new { @placeholder = "E-mail" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+                </div>
+                    <div class=" w3l-form-group">
+                        <label>Šifra </label>
+                        <div class="group">
+                            <i class="fas fa-unlock"></i>
+                            @Html.PasswordFor(m => m.Password, new { @placeholder = "Šifra" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="forgot">
+                        <p> @Html.CheckBoxFor(m => m.RememberMe) Zapamti me?</p>
+                    </div>
+                    <button type="submit" style="width:100%"> Potvrdi </button>
+                    <p class=" w3l-register-p">Nemaš nalog? <a href="~/Account/Register" class="register"> Registruj se</a></p>
+                }
+            </div>
+        </div>
+</body>
+
+</html>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

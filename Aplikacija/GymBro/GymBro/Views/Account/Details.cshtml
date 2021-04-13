@@ -1,0 +1,113 @@
+﻿@model GymBro.Models.UserRatingViewModel
+@{
+    ViewBag.Title = Model.appUser.FirstName + " " + Model.appUser.LastName;
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<h2>@(Model.appUser.FirstName + " " + Model.appUser.LastName)</h2>
+
+<div>
+    <h4>Osnovne informacije</h4>
+    <hr />
+
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.appUser.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.appUser.FirstName)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.appUser.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.appUser.LastName)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.appUser.Gender)
+        </dt>
+        @if (Model.appUser.Gender == true)
+        {
+            <dd>Muški</dd>
+        }
+        else
+        {
+            <dd>Ženski</dd>
+        }
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.appUser.Birthdate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.appUser.Birthdate)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.appUser.Town)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.appUser.Town)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.appUser.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.appUser.Email)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.appUser.AverageRating)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.appUser.AverageRating)
+        </dd>
+
+        <br />
+
+        <dd>
+            @if (Model.appUser.Ratings.Count == 0)
+            {
+                <p> Budi prva osoba koja ce oceniti @Model.appUser.FirstName</p>
+            }
+        </dd>
+
+        <dd>
+            @if (!Model.IsRated)
+            {
+                <p>Već ste ocenili ovog korisnika. @Html.ActionLink("Promeni datu ocenu?", "DeleteRating", new { userId = Model.appUser.Id })</p>
+            }
+            else
+            {
+                <h4>Oceni ovog korisnika</h4>
+                using (Html.BeginForm("SetRating", "Account", new { userId = @Model.appUser.Id }, FormMethod.Post, null))
+                {
+
+                    @Html.HiddenFor(x => x.appUser.Id)
+                    for (int i = 1; i <= 5; i++)
+                    {
+                        <input type="radio" id="Rank" name="rank" value="@i" /> @i
+                    }
+                    <input type="submit" value="Oceni" class="btn btn-primary" />
+                }
+            }
+        </dd>
+
+    </dl>
+</div>
